@@ -1,13 +1,13 @@
-package com.planty.discoveryservice;
+package com.planty.plantyservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DiscoveryServiceApplication {
+public class PlantyServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DiscoveryServiceApplication.class, args);
+		SpringApplication.run(PlantyServiceApplication.class, args);
 	}
 
 }
