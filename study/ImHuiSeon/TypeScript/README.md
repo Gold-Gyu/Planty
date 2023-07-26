@@ -558,3 +558,302 @@
       this.htmlList = [];
     }**
     ```
+
+# 02. 구조 분해 할당
+
+`NewsFeedView` 클래스의 `render` 함수에서 `newsFeed[i]`가 반복되고 있다.
+
+`newsFeed[i]`는 `this.feeds[i]`와 같으므로 변경해준다. 이때, `this.feeds[i].id` 이런식으로 사용하게 되면 `this.feeds[i]`가 반복되므로, 구조 분해 할당을 이용하여 각 속성명만 사용하도록 정의한다.
+
+`this.feeds[i]` 각각의 속성명과 동일한 변수명을 사용하면 자동적으로 동일한 이름에 해당 값이 저장되어 분해할 수 있다. ES5 이후 생겨난 문법이다.
+
+```tsx
+class NewsFeedView extends View {
+  ...
+
+  // 페이지대로 목록 불러오기 : 함수로 분리
+  render(): void {
+    for(let i = (store.currentPage - 1) * 10; i < store.currentPage * 10; i++) {
+      **const { id, title, comments_count, user, points, time_ago, read } = this.feeds[i];**
+      
+      this.addHtml(`
+        <div class="p-6 ${**read** ? 'bg-red-500' : 'bg-white'} mt-6 rounded-lg shadow-md transition-colors duration-500 hover:bg-green-100">
+          <div class="flex">
+            <div class="flex-auto">
+              <a href="#/show/${**id**}">${**title**}</a>  
+            </div>
+            <div class="text-center text-sm">
+              <div class="w-10 text-white bg-green-300 rounded-lg px-0 py-2">${**comments_count**}</div>
+            </div>
+          </div>
+          <div class="flex mt-3">
+            <div class="grid grid-cols-3 text-sm text-gray-500">
+              <div><i class="fas fa-user mr-1"></i>${**user**}</div>
+              <div><i class="fas fa-heart mr-1"></i>${**points**}</div>
+              <div><i class="far fa-clock mr-1"></i>${**time_ago**}</div>
+            </div>  
+          </div>
+        </div>    
+      `);
+    }
+
+		...
+  }
+
+  ...
+}
+```
+
+# 03. 라우터 구현
+
+1. `Router` 클래스를 구현한다.
+    
+    라우터는 반대의 방법(사용하는 쪽 구현 → class쪽 구현)으로 구현하였다. 각각의 방법마다 특성이 있으므로 취향에 맞는 쪽을 정해서 구현하면 된다.
+    
+    일단 `router` 함수의 내용을 그대로 가져온 class는 만들어 둠.
+    
+    ```tsx
+    class Router {
+      constructor() {
+          const routePath = location.hash;
+          
+          if(routePath === '') {
+            newsFeed(); // #(해시)도 빈 문자로 취급한다.
+          } else if(routePath.indexOf('#/page/') >= 0) {
+            // indexOf() : 입력으로 주어지는 문자열을 찾아서
+            // 있다면 위치 인덱스를 리턴하고, 없다면 -1을 리턴한다.
+            store.currentPage = Number(routePath.substr(7));
+            newsFeed();
+          } else {
+            newsDetail();
+          }
+        }
+    
+        window.addEventListener('hashchange', router);
+      }
+    }
+    ```
+    
+2. router로 사용할 기능들을 생각해 본다.
+    
+    우선 router에 페이지를 추가(`addRouterPath`)할 수 있어야 하고, 기본 페이지를 세팅(`setDefaultPage`)할 수 있어야 한다.
+    
+    ```tsx
+    ...
+    
+    const router: Router = new Router();
+    const newsFeedView = new NewsFeedView('root');
+    const newsDetailView = new NewsDetailView('root');
+    
+    router.setDefaultPage(newsFeedView); // 페이지 세팅
+    router.addRouterPath('/page/', newsFeedView); // 페이지 추가
+    router.addRouterPath('/show/', newsDetailView);
+    ```
+    
+3. `Router` 클래스의 `addRoutePath` 함수를 구현한다.
+    
+    route가 추가되어야 하기 때문에, 값을 저장할 `routeTable` 배열을 생성한다.
+    
+    배열에는 여러가지 복합적인 정보가 들어가야 하므로 객체가 저장되어야 하고, 객체가 저장될 경우 타입이 필요해지므로 타입을 위한 `interface`를 정의한다.
+    
+    ```tsx
+    class Router {
+      **routeTable: []; // route된 page가 추가되는 배열**
+    
+      constructor() {
+        ...
+      }
+    
+      **addRoutePath(path: string, page: View): void {
+    
+      }**
+    }
+    ```
+    
+4. `Router` 클래스 `routeTable` 속성의 인터페이스를 구현한다.
+    
+    ```tsx
+    interface RouteInfo {
+      path: string;
+      page: View;
+    }
+    ```
+    
+5. 인터페이스를 사용하여 `Router` 클래스의 속성을 구현하고, 나머지 필요한 메소드를 구현한다.
+    
+    ```tsx
+    **class Router {
+      defaultRoute: RouteInfo | null;
+      routeTable: RouteInfo[]; // route된 page가 추가되는 배열
+    
+      constructor() {
+        const routePath = location.hash;
+        
+        window.addEventListener('hashchange', router);
+        
+        this.defaultRoute = null;
+        this.routeTable = [];
+      }
+    
+      setDefaultPage(page: View): void {
+        this.defaultRoute = { path: '', page };
+      }
+    
+      addRoutePath(path: string, page: View): void {
+        this.routeTable.push({ path, page });
+      }
+    
+      route() {
+        const routePath = location.hash;
+    
+        if (routePath === '' && this.defaultRoute) {
+          this.defaultRoute.page.render();
+        }
+    
+        for (const routeInfo of this.routeTable) {
+          if(routePath.indexOf(routeInfo.path) >= 0) {
+            routeInfo.page.render();
+            break;
+          }
+        }
+      }
+    }**
+    ```
+    
+6. 그런데 render 함수는 View 클래스에 정의되어 있지 않다. 각각의 하위 클래스에 정의된 속성이다. `Router` 클래스도 어떤 것을 `render`할지 모르기 때문에 하위 클래스(`Router`) 내부에 정의해 주어야 한다. `View` 클래스에 추상 메소드를 정의하고 `Router` 클래스에 `render` 메소드를 구현한다.
+    
+    **※ 추상 메소드 : 부모에서 구현하진 않지만, 자식 클래스에서 반드시 구현하도록 명시해두는 메소드. `abstract` 키워드를 붙여 만들 수 있다. 추상 클래스에서 추상 메소드를 만들 수 있다.**
+    
+    ```tsx
+    **abstract class View {**
+      ...
+    
+      **abstract render(): void;
+    }**
+    ```
+    
+7. `hashchange`에 `route` 메소드를 연결 시켜 주어야 한다.
+    
+    그런데 `this.route`만 넣어서 연결 시켜줄 경우, 브라우저의 이벤트 시스템이 이 함수를 호출하게 된다. 그러면 호출이 되었을 때 이 this `context`가`Router`의 인스턴스가 아니게 된다.
+    
+    그렇게 되면 `defaultRoute`나 `rotueTable` 등 `Router` 인스턴스의 정보에는 접근을 할 수 없게 된다.
+    
+    그래서 넘겨줄 때, `bind` 메소드를 사용하여 꼭 `this`를 고정시켜 주어야 한다.
+    
+    ```tsx
+    class Router {
+      ...
+    
+    	constructor() {
+        **window.addEventListener('hashchange', this.route.bind(this));**
+        
+        ...
+      }
+    }
+    ```
+    
+8. 실행을 해보면 화면이 안 뜨는데, 최초 실행 시 `hashchange` 함수가 발생하지 않으므로 직접 한 번 실행해주어야 한다.
+    
+    ```tsx
+    router.route(); // 최초 실행 시, hashchange 함수가 발생하지 않으므로 직접 실행
+    ```
+    
+9. 글 목록을 불러오고 글 상세 보기까지 잘 작동하는 것을 볼 수 있다.
+    
+    하지만 페이지 변경이 되지 않는다(URL의 해쉬는 잘 바뀜, 동작은 X).
+    
+    `NewsDetailView` 클래스를 보면 `render`시, `store`에서 `currentPage` 데이터를 가져와서 사용하였다.
+    
+    `NewsFeedView` 클래스에서도 `render`시, `store`의 `currentPage` 데이터를 처리해주면 된다.
+    
+    ```tsx
+    class NewsFeedView extends View {
+      ...
+    
+      render(): void {
+        **store.currentPage = Number(location.hash.substr(7) || 1); // 디폴트 페이지는 숫자가 없기 때문에 1로 설정**
+        
+    		...
+      }
+    
+    	...
+    }
+    ```
+    
+
+# 04. 접근 제어
+
+> 외부에서 속성에 접근할 수 없도록 접근 제어자를 붙인다. 디폴트 접근 제어자는 `public`이므로 어디서든 접근이 가능하다.
+> 
+1. `View` 클래스의 속성을 먼저 살펴본다.
+    
+    `View` 클래스의 속성은 외부(2)로부터 접근할 필요가 없는 속성이다. `private` 접근 제어자를 붙인다.
+    
+    **※ 참고로 외부라는 범주는 2가지로 나뉘어 진다.**
+    
+    외부는 `View` 클래스의 바깥쪽 즉, 인스턴스 객체로 접근하는 경우를 외부라고 한다.
+    
+    1. `protected` : 상속 받은 자식 class 안에서 접근하는 경우.
+    2. `private` : 상속 관계가 전혀 없는 완전 바깥쪽에서 접근하는 경우.
+    
+    ```tsx
+    abstract class View {
+      **private** template: string;
+      **private** renderTemplate: string;
+      **private** container: HTMLElement;
+      **private** htmlList: string[];
+    
+    	...
+    }
+    ```
+    
+2. 다음으로 `View` 클래스의 메소드는 하위 자식들에서 사용 가능해야 하므로 `protected`를 붙인다. `clearHtmlList` 메소드는 `View` 클래스 내부에서만 사용되므로 `private`를 붙인다.
+    
+    ```tsx
+    abstract class View {
+      ...
+    
+      **protected** updateView(): void { ... }
+    
+      **protected** addHtml(htmlString: string): void { ... }
+    
+      **protected** getHtml(): string { ... }
+    
+      **protected** setTemplateData(key: string, value: string): void { ... }
+    
+      **private** clearHtmlList(): void { ... }
+    
+      abstract render(): void;
+    }
+    ```
+    
+3. 다음으로 `NewsFeedView` 클래스의 속성도 외부(2)에서 접근할 필요가 없는 속성이다. `private` 접근 제어자를 붙인다.
+    
+    `render` 메소드는 외부에서 사용하는 메소드이므로 `public`(default)을 사용한다.
+    
+    `makeFeeds` 메소드는 내부에서만 사용하므로 `private`을 사용한다.
+    
+    ```tsx
+    class NewsFeedView extends View {
+      **private** api: NewsFeedApi;
+      **private** feeds: NewsFeed[];
+    
+    	...
+    
+    	**private** makeFeeds(): void {
+    		...
+    	}
+    }
+    ```
+    
+4. `NewsDetailView` 클래스는 속성이 없다. `makeComment` 메소드는 내부에서만 사용하므로 `private`을 붙인다.
+    
+    ```tsx
+    class NewsDetailView extends View {
+      ...
+    
+      **private** makeComment(comments: NewsComment[]): string {
+        ...
+      }
+    }
+    ```
