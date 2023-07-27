@@ -27,7 +27,7 @@ val snippetsDir by extra {file("build/generated-snippets")} // 변경
 extra["springCloudVersion"] = "2022.0.3"
 
 dependencies {
-//	implementation("org.springframework.boot:spring-boot-starter-data-jpa") // 잠시 주석
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa") // 잠시 주석
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-web-services")
 	implementation("org.springframework.boot:spring-boot-starter-websocket")
@@ -37,6 +37,11 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+
+	// Database
+	runtimeOnly("com.h2database:h2")
+//	runtimeOnly("mysql:mysql-connector-j")
+	runtimeOnly("mysql:mysql-connector-java:8.0.32")
 }
 
 dependencyManagement {
