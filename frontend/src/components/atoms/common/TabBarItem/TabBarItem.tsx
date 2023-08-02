@@ -1,37 +1,19 @@
-// ToolMenuBar.tsx
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './TabBarItem.scss';
-// import { ReactComponent as Home } from '../../../../assets/icons/ToolBar/HomeImg.svg';
-import TabBar from 'constants/tabbar/TabBar';
-
-// interface ToolMenuBarProps {
-// 	imgSrc: string;
-// 	imgName: string;
-// }
+import TabMenu from 'constants/tabbar/TabBar';
 
 function TabBarItem({ MenuKey }: { MenuKey: string }) {
-	const Menu = TabBar[`${MenuKey}`];
-	const MenuImg = Menu.imgSrc;
-	// const { imgSrc, imgName } = props;
-	// 0 이면 홈 1이면 구독샵 2이면 응급실 3이면 마이페이지
-	const [homeToggle, setHomeToggle] = useState(false);
-	const isClicked = () => {
-		setHomeToggle(!homeToggle);
-		console.log(homeToggle);
-	};
-
+	const Menu = TabMenu[MenuKey];
 	return (
-		<div className="menuBox" onClick={isClicked} aria-hidden="true">
+		<Link to={`/${MenuKey}`} className="menuBox">
 			<div>
 				<div className="iconBox">
-					<img src={MenuImg} alt={Menu.imgName} />
+					<img src={Menu.imgSrc} alt={Menu.imgName} />
+					<span>{Menu.imgName}</span>
 				</div>
-				<span>{Menu.imgName}</span>
-				{/* <span>{Menu.imgSrc}</span> */}
-				{/* <Home fill="blue" /> */}
 			</div>
-		</div>
+		</Link>
 	);
 }
-
 export default TabBarItem;
