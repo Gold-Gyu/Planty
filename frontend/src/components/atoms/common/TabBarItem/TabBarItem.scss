@@ -1,0 +1,19 @@
+.menu-box {
+	width: 100%;
+	cursor: pointer;
+}
+
+.icon-box {
+	display: flex;
+	gap: 2px;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	img {
+		display: block;
+	}
+}
+
+.green {
+	color: #03c75a;
+}
