@@ -12,7 +12,7 @@ function ShopPageLayout({ children }: { children: ReactNode[] }) {
 			<div className="shop-page-layout-container">
 				{/* 구독 상품 목록(제목, 필터, 목록) */}
 				<ContentsLayout id="product-list-container">
-					{children[1]}
+					<div className="filter-big-box">{children[1]}</div>
 					<div id="product-list">
 						{children[2]}
 						{children[3]}
