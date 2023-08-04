@@ -3,7 +3,11 @@
 @import 'styles/mixins/common';
 
 .filter-box {
-	justify-content: space-around;
+	// justify-content: space-around;
 	display: flex;
-	padding: 0px 10% 0px 10%;
+	flex-direction: row;
+	gap: 10px;
+	margin-bottom: $mr-lg;
+	// align-items: flex-start;
+	// padding: 0px 10% 0px 10%;
 }

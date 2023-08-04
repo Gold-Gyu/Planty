@@ -3,14 +3,20 @@
 @import 'styles/mixins/flex';
 
 .price-final-box {
-    @include border-gray;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: calc(100% - 20px); /* 화면 끝에서 화면 끝으로 width 설정 */
     height: 60px;
-    border-radius: var.$rd-sm;
-}   
+    border-radius: var.$rd-md;
+    background-color: var.$white;
+    position: fixed;
+    bottom: 56px;
+    left: 10px; /* 왼쪽 여백 설정 */
+    right: 10px; /* 오른쪽 여백 설정 */
+    padding: 0 10px; /* 내용과 border 사이 여백 설정 */
+    @include border-gray; /* border 설정 */
+}
 
 .price {
     font-size: var.$h2;

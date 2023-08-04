@@ -10,7 +10,7 @@
 	padding: var.$pd-sm;
 	text-align: center;
 	font-size: var.$h5;
-
+	height: 40px;
 	&.primary {
 		@include buttonColor(var.$primary);
 	}
