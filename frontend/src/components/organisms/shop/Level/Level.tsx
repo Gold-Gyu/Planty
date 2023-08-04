@@ -1,5 +1,5 @@
 import React from 'react';
-import LeafFill from 'assets/icons/LeafFill.svg';
+import LeafFill from 'assets/icons/LeafGreenFill.svg';
 import Leaf from 'assets/icons/Leaf.svg';
 import './Level.scss';
 

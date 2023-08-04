@@ -17,7 +17,7 @@ function ProductListItem({ product }: { product: IProduct }) {
 	return (
 		<ProductListItemLayout>
 			<ListItemTitle title={product.title} url={`detail/${product.pid}`} />
-			<img src={product.thumbnail} alt="" />
+			<img src={product.thumbnail} alt="" style={{ width: '100%', height: '120px' }} />
 			<InfoList info={product.info} />
 			<Button isActive={false} text="구매하기" handleClick={testFunc} />
 		</ProductListItemLayout>

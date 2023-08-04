@@ -20,7 +20,6 @@ function ShopDetailPageLayout({ children }: { children: ReactNode[] }) {
 			</ContentsLayout>
 			<ContentsLayout id="">{children[4]}</ContentsLayout>
 			{children[5]}
-			{/* 가격과 구매하기 버튼 */}
 		</PageLayout>
 	);
 }

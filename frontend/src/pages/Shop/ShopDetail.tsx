@@ -21,7 +21,7 @@ function ShopDetail() {
 			<Title />
 			<InfoList product={ProductDetail[0]} />
 			<ImgDetail />
-			<Price />
+			<Price product={ProductDetail[0]} />
 		</ShopDetailPageLayout>
 	);
 }
