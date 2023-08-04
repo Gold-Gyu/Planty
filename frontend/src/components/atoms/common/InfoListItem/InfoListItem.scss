@@ -3,7 +3,7 @@
 
 .info-list-item {
 	@include flex-row;
-
+	height: 22px;
 	span {
 		font-size: var.$p1;
 		margin-bottom: var.$mr-sm;
