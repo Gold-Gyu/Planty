@@ -1,7 +1,16 @@
 import React from 'react';
+import './price.scss';
+import PurchaseButton from 'components/atoms/common/PurchaseButton/PurchaseButton';
 
-const price = () => {
-	return <div />;
-};
+// interface
 
-export default price;
+function Price() {
+	return (
+		<div className="price-final-box">
+			<div className="price">20,000원</div>
+			<PurchaseButton />
+		</div>
+	);
+}
+
+export default Price;
