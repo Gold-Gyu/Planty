@@ -63,9 +63,9 @@ export interface IProduct {
 	title: string;
 	thumbnail: string;
 	info: {
-		period: number;
-		level: number;
-		price: number;
+		구독기간: number;
+		난이도: number;
+		가격: number;
 	};
 }
 
