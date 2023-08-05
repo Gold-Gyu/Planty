@@ -16,6 +16,7 @@ function ShopPageLayout({ children }: { children: ReactNode[] }) {
 					<div id="product-list">
 						{children[2]}
 						{children[3]}
+						{children[4]}
 					</div>
 				</ContentsLayout>
 			</div>
