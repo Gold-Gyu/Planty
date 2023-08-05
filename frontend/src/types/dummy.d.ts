@@ -15,6 +15,7 @@ export interface IConsultingSummary {
 }
 
 export interface ISubscribeDetail extends ISubscribe {
+	plantName: string;
 	detailInfo: {
 		subscribeStartDate: string;
 		subscribeEndDate: string;
@@ -33,6 +34,7 @@ interface IEmbeddedDate {
 
 // 컨설팅 예약건
 export interface IConsulting {
+	sid: number;
 	cid: number;
 	date: Date;
 	active: boolean;

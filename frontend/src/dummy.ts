@@ -3,6 +3,7 @@ import { ISubscribe, IProduct, IBanner, IConsulting, ISubscribeDetail, IProductD
 
 export const dummyBookings: IConsulting[] = [
 	{
+		sid: 0,
 		cid: 1,
 		user: '김인혁',
 		greenmate: '전인혁',
@@ -21,6 +22,7 @@ export const dummyBookings: IConsulting[] = [
 		},
 	},
 	{
+		sid: 1,
 		cid: 2,
 		user: '양시온',
 		greenmate: '전윤철',
@@ -39,6 +41,7 @@ export const dummyBookings: IConsulting[] = [
 		},
 	},
 	{
+		sid: 2,
 		cid: 3,
 		user: '누구냐',
 		greenmate: '이금규띠',
@@ -165,6 +168,7 @@ export const ProductDetail: IProductDetail[] = [
 export const dummySubscribeDetail: ISubscribeDetail = {
 	sid: 0,
 	title: '누구나 쉽게 키우는 몬스테라 클래스',
+	plantName: '몬스테라',
 	state: 'wait',
 	thumbnail: 'https://www.flowerrepublic.co.kr/shopimages/sungmo9160/0090010004832.jpg?1665473103',
 	info: { startDate: '2023/07/23', consultCount: '총 5회 / 잔여 3회', consultDate: '2023/07/23 14:00' },
