@@ -1,4 +1,4 @@
-import IConsultingHistory from 'types/consulting';
+import { IConsultingHistory } from 'types/consulting';
 import { ISubscribe, IProduct, IBanner, IConsulting, ISubscribeDetail, IProductDetail } from 'types/dummy';
 import { IPlantData } from 'types/global';
 
@@ -160,6 +160,7 @@ export const dummyProduct: IProduct[] = [
 export const ProductDetail: IProductDetail[] = [
 	{
 		pid: 0,
+		title: '누구나 쉽게 키우는 몬스테라 클래스',
 		info: {
 			price: 20000,
 			target: '초심자',
@@ -169,6 +170,7 @@ export const ProductDetail: IProductDetail[] = [
 	},
 	{
 		pid: 1,
+		title: '스투키 일주일 클래스',
 		info: {
 			price: 12000,
 			target: '중급자',
@@ -178,6 +180,7 @@ export const ProductDetail: IProductDetail[] = [
 	},
 	{
 		pid: 2,
+		title: '싸피 방울토마토 짱짱 클래스',
 		info: {
 			price: 8000,
 			target: '왕초보',
