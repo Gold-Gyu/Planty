@@ -18,7 +18,11 @@ import HistoryPage from 'pages/History/HistoryPage';
 import SettingPage from 'pages/Setting/SettingPage';
 import LoginPage from 'pages/login/LoginPage';
 import SubscribesDetailPage from 'pages/Subscribes/SubscribesDetailPage';
+<<<<<<< HEAD
 import CommentPage from 'pages/Consulting/CommentPage';
+=======
+import EmergencyDetail from 'components/organisms/history/EmergencyDetail/EmergencyDetail';
+>>>>>>> 0a3352e9073e901b5dc5824f0c26ed3da73d4ac3
 import PrivateRoute from './PrivateRoute';
 
 function AppRouter() {
@@ -51,7 +55,9 @@ function AppRouter() {
 						</Route>
 						<Route path="/history" element={<HistoryPage />}>
 							<Route path="" element={<Navigate to="emergency" />} />
-							<Route path="emergency" element={<EmergencyPage />} />
+							<Route path="emergency" element={<EmergencyPage />}>
+								<Route path=":eid" element={<EmergencyDetail />} />
+							</Route>
 							<Route path="consulting" element={<ConsultingPage />} />
 						</Route>
 						<Route path="/settings" element={<SettingPage />} />
