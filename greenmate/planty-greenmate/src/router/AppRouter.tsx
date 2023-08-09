@@ -19,7 +19,11 @@ import SettingPage from 'pages/Setting/SettingPage';
 import LoginPage from 'pages/login/LoginPage';
 import SubscribesDetailPage from 'pages/Subscribes/SubscribesDetailPage';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import CommentPage from 'pages/Consulting/CommentPage';
+=======
+import EmergencyDetail from 'components/organisms/history/EmergencyDetail/EmergencyDetail';
+>>>>>>> 0a3352e9073e901b5dc5824f0c26ed3da73d4ac3
 =======
 import EmergencyDetail from 'components/organisms/history/EmergencyDetail/EmergencyDetail';
 >>>>>>> 0a3352e9073e901b5dc5824f0c26ed3da73d4ac3
