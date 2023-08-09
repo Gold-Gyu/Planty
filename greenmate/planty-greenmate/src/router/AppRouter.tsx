@@ -18,6 +18,7 @@ import HistoryPage from 'pages/History/HistoryPage';
 import SettingPage from 'pages/Setting/SettingPage';
 import LoginPage from 'pages/login/LoginPage';
 import SubscribesDetailPage from 'pages/Subscribes/SubscribesDetailPage';
+import CommentPage from 'pages/Consulting/CommentPage';
 import PrivateRoute from './PrivateRoute';
 
 function AppRouter() {
@@ -40,6 +41,7 @@ function AppRouter() {
 							<Route path="chatting" element={<ChattingPage />} />
 							<Route path="video" element={<VideoPage />} />
 						</Route>
+						<Route path="/comment" element={<CommentPage />} />
 						<Route path="/subscribes" element={<SubscribesPage />}>
 							<Route path="" element={<Navigate to="list" />} />
 							<Route path="list" element={<ListPage />}>

@@ -1,0 +1,14 @@
+@use 'styles/base/_variable.scss' as var;
+
+.green-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var.$green;
+  font-size: 15px;
+  width: 220px;
+  height: 35px;
+  text-align: center;
+  border-radius: var.$rd-sm;
+  color: var.$white
+}

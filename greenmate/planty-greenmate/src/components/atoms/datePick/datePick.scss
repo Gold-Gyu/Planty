@@ -1,0 +1,18 @@
+@import 'styles/base/_variable.scss';
+
+.react-datepicker__input-container input {
+    border: 1px solid grey;
+    border-radius: 2px;
+    text-align: center;
+    width: 70%;
+    font-size: 13px;
+    color: $navy;
+}
+
+.react-datepicker-wrapper::after {
+    content: url('./assets/icons/DatePick.svg');
+    position: absolute;
+    top: 50%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+}
