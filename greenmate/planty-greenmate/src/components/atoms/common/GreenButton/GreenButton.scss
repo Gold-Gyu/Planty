@@ -1,0 +1,12 @@
+@import 'styles/base/variable';
+
+.greenbutton {
+	padding: $pd-sm;
+	text-align: center;
+	font-size: $h5;
+	background-color: $green;
+	border-radius: $rd-sm;
+	color: $white;
+	width: 200px;
+	height: 35px;
+}

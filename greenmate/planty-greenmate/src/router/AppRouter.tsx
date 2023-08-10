@@ -22,6 +22,7 @@ import EmergencyDetail from 'components/organisms/history/EmergencyDetail/Emerge
 import ConsultingList from 'components/organisms/history/ConsultingList/ConsultingList';
 import ScrollToTop from 'components/atoms/common/ScrollToTop/ScrollToTop';
 import { Toaster } from 'react-hot-toast';
+import CommentPage from 'pages/Consulting/CommentPage';
 import PrivateRoute from './PrivateRoute';
 
 function AppRouter() {
@@ -44,6 +45,7 @@ function AppRouter() {
 							<Route path="chatting" element={<ChattingPage />} />
 							<Route path="video" element={<VideoPage />} />
 						</Route>
+						<Route path="comment" element={<CommentPage />} />
 						<Route path="/subscribes" element={<SubscribesPage />}>
 							<Route path="" element={<Navigate to="list" />} />
 							<Route path="list" element={<ListPage />}>

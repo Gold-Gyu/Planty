@@ -1,0 +1,71 @@
+@import 'styles/base/variable';
+@import 'styles/mixins/common';
+@import 'styles/mixins/flex';
+
+#comment-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10%;
+}
+
+#comment-title {
+    font-size: 30px;
+    color: $black-500;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#comment-subtitle {
+    font-size: 23px;
+    color: $navy;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#comment-content {}
+
+#comment-text textarea {
+    width: 700px;
+    height: 250px;
+    border: 1px solid $black-200;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    border-radius: 4px;
+    font-size: 16px;
+
+    &::placeholder {
+        font-size: 14px;
+    }
+}
+
+
+
+#comment-name {
+    align-items: start;
+    font-size: 18px;
+    color: $navy;
+    font-weight: bold;
+}
+
+#comment-footer {
+    font-size: 18px;
+    color: $navy;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#comment-subfooter {
+    font-size: 18px;
+    color: $navy;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+#comment-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

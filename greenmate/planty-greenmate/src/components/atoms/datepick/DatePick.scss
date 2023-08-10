@@ -1,0 +1,11 @@
+@import 'styles/base/_variable.scss';
+
+.react-datepicker__input-container input {
+    border: 1px solid grey;
+    border-radius: 2px;
+    text-align: center;
+    width: 90px;
+    height: 25px;
+    font-size: 13px;
+    color: $navy;
+}
