@@ -15,6 +15,7 @@ import BOOKING_LIST_ITEM_LABELS from 'constants/common/Labels';
 function BookingListItem({ booking }: { booking: IConsulting }) {
 	const [state, setState] = useState('wait');
 
+	// const BookingList = [];
 	const testFunc = () => {
 		alert('클릭');
 	};

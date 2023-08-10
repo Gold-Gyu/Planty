@@ -8,10 +8,12 @@ import SquareShortcutButton from 'components/atoms/common/SquareShortcutButton/S
 import RectShortcutButton from 'components/atoms/common/RectShortcutButton/RectShortcutButton';
 import Header from 'components/organisms/common/Header/Header';
 import useMovePage from 'hooks/useMovePage';
+// import { ISubscribe } from 'types/subscribe';
+// import useAllSubscribe from 'hooks/subscribes/useAllSubscribe';
 
 function HomePage() {
 	const { movePage } = useMovePage();
-
+	// const subscribes: ISubscribe[] = useAllSubscribe() as ISubscribe[];
 	return (
 		<HomePageLayout>
 			<Header />

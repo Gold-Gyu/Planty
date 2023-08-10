@@ -5,6 +5,7 @@ import { Value } from 'types/global';
 import { dummyBookings } from 'dummy';
 import EmptyItem from 'components/atoms/common/EmptyItem/EmptyItem';
 import isSameDate from 'utils/isSameDate';
+import { IConsulting } from 'types/dummy';
 import BookingListItem from '../BookingListItem/BookingListItem';
 
 /**
@@ -12,8 +13,9 @@ import BookingListItem from '../BookingListItem/BookingListItem';
  * @param date 예약 내역 조회를 원하는 날짜 (Date)
  */
 function BookingList({ date }: { date: Value }) {
+	const reservations: IConsulting[] = useBookingList() as IConsulting[];
 	let listElement;
-
+	console.log(reservations);
 	// 서버로부터 받아온 예약(컨설팅) 목록
 	const bookings = useBookingList({ date });
 	console.log(bookings);

@@ -1,19 +1,27 @@
 import React from 'react';
 import InfoListItem from 'components/atoms/common/InfoListItem/InfoListItem';
-import Level from 'components/organisms/shop/Level/Level';
+// import { ISubscribe } from 'types/subscribe';
+// import { IConsulting, IProduct } from 'types/dummy';
+// import Level from 'components/organisms/shop/Level/Level';
 /**
  * 구독, 상품 등의 정보를 나타내는 아이템의 모음
  * @param info 정보들을 담고 있는 객체
  */
-function InfoList({ info, labels }: { info: object; labels: string[] }) {
-	const keys = Object.keys(info);
-	const values = Object.values(info);
-	console.log(keys);
+function InfoList({ subscribe, labels }: { subscribe: string[]; labels: string[] }) {
+	// const keys = Object.keys(subscribe);
+	// const values = Object.values(subscribe);
 	// console.log(labels);
-
+	// console.log(values);
 	return (
 		<div className="info-list-container">
-			{labels.map((title, idx) => {
+			{labels.map((title, idx) => (
+				<InfoListItem key={title}>
+					<div>{title}</div>
+					<div>{subscribe[idx]}</div>
+				</InfoListItem>
+			))}
+
+			{/* {labels.map((title, idx) => {
 				let content;
 				if (title === '난이도') {
 					content = <Level level={values[idx]} />;
@@ -34,7 +42,7 @@ function InfoList({ info, labels }: { info: object; labels: string[] }) {
 						{content}
 					</InfoListItem>
 				);
-			})}
+			})} */}
 		</div>
 	);
 }
