@@ -1,7 +1,13 @@
 import React from 'react';
+import AppRouter from 'router/AppRouter';
+import { RecoilRoot } from 'recoil';
 
 function App() {
-	return <div>리액트앱</div>;
+	return (
+		<RecoilRoot>
+			<AppRouter />
+		</RecoilRoot>
+	);
 }
 
 export default App;
