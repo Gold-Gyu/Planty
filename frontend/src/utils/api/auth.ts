@@ -80,6 +80,6 @@ export const socialLoginApi = async (res: CredentialResponse) => {
 	const body = {
 		profileObj: res,
 	};
-	const response = await instance.post('/oauth/jwt/google', JSON.stringify(body));
+	const response = await instance.post('/users/oauth/jwt/google', JSON.stringify(body));
 	return response;
 };
