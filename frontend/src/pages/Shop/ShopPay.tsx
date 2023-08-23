@@ -27,10 +27,10 @@ function ShopPay() {
 				<PageTitleButton type="back" text="이전으로" />
 				<AreaTitle title="주문/결제" url="#" />
 				<PayUserInfoBox text="주문자 정보">
-					<BuyerInfo info={user.userName} />
+					<BuyerInfo info={user.username} />
 					<BuyerInfo info={user.email} />
 				</PayUserInfoBox>
-				<Address address={user.shipping_address ?? '배송지 정보 없음'} name={user.userName} phone="01012345678" />
+				<Address address={user.shipping_address ?? '배송지 정보 없음'} name={user.username} phone="01012345678" />
 				<ProductInfo product={state.product} />
 				<PayCheck product={state.product} />
 				{/* <EndButton pid={pid} /> */}

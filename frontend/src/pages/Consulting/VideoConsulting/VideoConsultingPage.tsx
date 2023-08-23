@@ -131,7 +131,7 @@ function VideoConsultingPage() {
 		setSession(newSession);
 
 		const { token } = consultingSession as IConsultingSession;
-		await newSession.connect(token, { clientData: user?.userName });
+		await newSession.connect(token, { clientData: user?.username });
 		let videoSource;
 
 		// 카메라

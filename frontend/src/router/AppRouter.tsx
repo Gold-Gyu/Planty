@@ -54,6 +54,7 @@ function AppRouter() {
 
 		if (response === null) return;
 		if (response.status === 200) {
+			console.log('회원정보 get', response);
 			setUser(response.data);
 		}
 	};

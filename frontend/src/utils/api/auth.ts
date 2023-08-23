@@ -1,6 +1,6 @@
 import LocalStorage from 'constants/storage/LocalStorage';
-// import jwt_decode from 'jwt-decode';
-import { LoginBody, SetUserBody } from 'types/domain/user';
+import jwt_decode from 'jwt-decode';
+import { AccessToken, LoginBody, SetUserBody } from 'types/domain/user';
 import SessionStorage from 'constants/storage/SessionStorage';
 import { CredentialResponse } from '@react-oauth/google';
 import { instance } from './instance';
@@ -11,12 +11,11 @@ import { instance } from './instance';
  */
 const getUidFromAccessToken = (): number | null => {
 	const token = LocalStorage.getItem('AccessToken') as string;
-	// const decoded: AccessToken = jwt_decode(token);
 
-	// TODO : 임시 uid
-	if (token) return 1;
+	const decoded: AccessToken = jwt_decode(token);
+
+	if (token) return decoded.uid;
 	return null;
-	// return decoded.uid;
 };
 
 /**

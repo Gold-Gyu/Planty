@@ -20,6 +20,6 @@ export type IUser = {
 	photo: null | string;
 	shipping_address: null | string;
 	userId: string;
-	userName: string;
 	userType: null | string;
+	username: string;
 };
